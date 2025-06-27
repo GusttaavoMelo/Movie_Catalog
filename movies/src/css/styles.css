@@ -1,0 +1,70 @@
+
+.movie-card {
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.favorite-btn.active {
+    color: #f59e0b;
+}
+.skeleton {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background-color: rgba(229, 231, 235, 0.5);
+}
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+.dark .skeleton {
+    background-color: rgba(31, 41, 55, 0.5);
+}
+.hero-section {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.8) 0%, rgba(2, 132, 199, 0.9) 100%);
+}
+.feature-card {
+    transition: all 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.trending-movie {
+    transition: all 0.3s ease;
+}
+.trending-movie:hover {
+    transform: scale(1.03);
+}
+ .hero-section {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+        }
+        
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            to {
+                background-position: -200% 0;
+            }
+        }
+        
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .movie-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-5px);
+        }

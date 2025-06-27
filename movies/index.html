@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Catalog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/movies/src/css/styles.css">
+    <link rel="shortcut icon" href="/movies/src/img/develop-icon-7-fotor-2024121717196.png" type="image/x-icon">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div class="flex items-center gap-4">
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent">
+                    <a href="index.html" class="hover:opacity-90 transition-opacity">Movie Catalog</a>
+                </h1>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+            </div>
+            
+            <div class="relative w-full md:w-96">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Search for movies..." 
+                    class="w-full px-4 py-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
+                    aria-label="Search movies"
+                >
+                <button id="search-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-primary-500 transition-colors" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Home Screen -->
+            <div id="home-screen">
+                <!-- Hero Section -->
+                <section class="hero-section rounded-xl p-8 md:p-12 mb-12 text-white shadow-lg">
+                    <div class="max-w-3xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">Discover Your Next Favorite Movie</h2>
+                        <p class="text-xl mb-8 opacity-90">Browse thousands of movies, save your favorites, and never miss what to watch next.</p>
+                        <button id="explore-btn" class="px-6 py-3 bg-white text-primary-600 font-medium rounded-full hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg">
+                            Explore Movies <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Features Section -->
+                <section class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6">Why Choose Movie Catalog?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-search text-primary-600 dark:text-primary-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">Easy Search</h4>
+                            <p class="text-gray-600 dark:text-gray-400">Find any movie with our powerful search engine and detailed filters.</p>
+                        </div>
+                        <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-heart text-primary-600 dark:text-primary-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">Save Favorites</h4>
+                            <p class="text-gray-600 dark:text-gray-400">Keep track of movies you love with our favorites system.</p>
+                        </div>
+                        <div class="feature-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-info-circle text-primary-600 dark:text-primary-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">Detailed Info</h4>
+                            <p class="text-gray-600 dark:text-gray-400">Get comprehensive information about every movie in one place.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Trending Movies -->
+                <section class="mb-12">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold">Trending Now</h3>
+                        <button id="view-all-trending" class="text-primary-600 dark:text-primary-400 hover:underline transition-colors">
+                            View All
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" id="trending-movies">
+                        <!-- Trending movies will be loaded here -->
+                        <div class="skeleton h-64 rounded-xl"></div>
+                        <div class="skeleton h-64 rounded-xl"></div>
+                        <div class="skeleton h-64 rounded-xl"></div>
+                        <div class="skeleton h-64 rounded-xl"></div>
+                        <div class="skeleton h-64 rounded-xl hidden md:block"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Catalog Section (Hidden by default) -->
+            <div id="catalog-section" class="hidden">
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+                    <button id="search-tab" class="tab-btn active px-4 py-2 font-medium text-primary-600 dark:text-primary-400 border-b-2 border-primary-500 transition-colors">
+                        Search Results
+                    </button>
+                    <button id="favorites-tab" class="tab-btn px-4 py-2 font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+                        Favorites
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading" class="hidden flex justify-center items-center py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error-message" class="hidden bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-4 py-3 rounded mb-6 transition-opacity"></div>
+
+                <!-- Search Results -->
+                <div id="search-results">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="movies-container">
+                        <!-- Movie cards will be inserted here by JavaScript -->
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <button id="load-more" class="hidden px-6 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-full transition-colors shadow-md hover:shadow-lg">
+                            Load More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Favorites -->
+                <div id="favorites-container" class="hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="favorites-list">
+                        <!-- Favorite movies will be inserted here by JavaScript -->
+                    </div>
+                    <div id="no-favorites" class="hidden text-center py-12 text-gray-500 dark:text-gray-400 transition-opacity">
+                        <i class="fas fa-heart text-4xl mb-4 text-gray-300 dark:text-gray-600"></i>
+                        <p class="text-xl">No favorite movies yet</p>
+                        <p class="mt-2">Search for movies and click the heart icon to add them to favorites</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movie Details Modal -->
+            <div id="movie-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 transition-opacity">
+                <div class="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                    <div class="relative">
+                        <button id="close-modal" class="absolute top-4 right-4 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 rounded-full p-2 hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors" aria-label="Close modal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div id="modal-content" class="p-6">
+                            <!-- Modal content will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+
+    <footer class="bg-dark-blue-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#home" class="text-xl font-bold text-white">Gustavo<span class="text-blue-400">Melo</span></a>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <p class="text-gray-400 mb-2">© 2023 Gustavo Melo. Todos os direitos reservados.</p>
+                    <div class="flex space-x-6">
+                        <a href="https://github.com/GusttaavoMelo" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/desenvolvedor-front-end-gustavo-melo/" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                         <a href="https://gusttaavomeloo.netlify.app/" class="text-gray-400 hover:text-white transition">
+                            <i class="fas fa-code "></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./src/js/script.js"></script>
+</body>
+</html>
