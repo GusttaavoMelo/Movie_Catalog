@@ -170,7 +170,7 @@
                 </div>
                 
                 <div class="flex flex-col items-center md:items-end">
-                    <p class="text-gray-400 mb-2">© 2023 Gustavo Melo. Todos os direitos reservados.</p>
+                    <p class="text-gray-400 mb-2">© <span id="current-year"></span> Gustavo Melo. Todos os direitos reservados.</p>
                     <div class="flex space-x-6">
                         <a href="https://github.com/GusttaavoMelo" class="text-gray-400 hover:text-white transition">
                             <i class="fab fa-github"></i>
@@ -188,5 +188,8 @@
     </footer>
 
     <script src="./src/js/script.js"></script>
+    <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
